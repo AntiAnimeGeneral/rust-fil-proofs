@@ -8,6 +8,7 @@ use serde_json::to_string_pretty;
 use storage_proofs_core::api_version::{ApiFeature, ApiVersion};
 
 mod porep;
+mod window_post;
 
 #[derive(Debug, Parser)]
 struct Cli {
@@ -26,6 +27,9 @@ struct Cli {
     #[clap(long, default_value_t = ApiVersion::V1_2_0)]
     api_version: ApiVersion,
     api_features: Vec<ApiFeature>,
+
+    ///
+    #[clap(long, default_value_t = true)]
     preserve_cache: bool,
     skip_precommit_phase1: bool,
     skip_precommit_phase2: bool,
