@@ -10,3 +10,4 @@ logging-toolkit
 *.heap
 rust-fil-proofs.config.toml
 /cache
+.vscode/

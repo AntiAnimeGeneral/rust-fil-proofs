@@ -34,6 +34,9 @@ struct Cli {
     test_resume: bool,
 }
 
+#[derive(Debug, Parser)]
+struct Validate {}
+
 fn parse_size(size: &str) -> anyhow::Result<usize> {
     let size = Byte::from_str(size)?.get_bytes() as usize;
     match size as u64 {
@@ -63,11 +66,13 @@ fn main() {
         test_resume,
     } = Cli::parse();
 
-    if tasks == 1 {
+    (0..tasks).into_par_iter().for_each(|task| {
+        let mut cache = cache.clone();
+        cache.push_str(&format!("/task-{task}"));
         let rep = porep::run(
             size,
             api_version,
-            api_features,
+            api_features.clone(),
             cache,
             preserve_cache,
             skip_precommit_phase1,
@@ -80,30 +85,8 @@ fn main() {
         let wrapped = Metadata::wrap(&rep)
             .expect("failed to retrieve metadata");
         let js = to_string_pretty(&wrapped).unwrap();
-        println!("report: {js}")
-    } else {
-        (0..tasks).into_par_iter().for_each(|task| {
-            let mut cache = cache.clone();
-            cache.push_str(&format!("/task-{task}"));
-            let rep = porep::run(
-                size,
-                api_version,
-                api_features.clone(),
-                cache,
-                preserve_cache,
-                skip_precommit_phase1,
-                skip_precommit_phase2,
-                skip_commit_phase1,
-                skip_commit_phase2,
-                test_resume,
-            )
-            .unwrap();
-            let wrapped = Metadata::wrap(&rep)
-                .expect("failed to retrieve metadata");
-            let js = to_string_pretty(&wrapped).unwrap();
-            println!("task-{task}-report: {js}")
-        });
-    }
+        println!("task-{task}-report: {js}")
+    });
 }
 
 #[cfg(test)]
