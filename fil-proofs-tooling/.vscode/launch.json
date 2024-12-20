@@ -1,0 +1,1288 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'fil_proofs_param'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=fil-proofs-param"
+                ],
+                "filter": {
+                    "name": "fil_proofs_param",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'fakeipfsadd'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=fakeipfsadd",
+                    "--package=fil-proofs-param"
+                ],
+                "filter": {
+                    "name": "fakeipfsadd",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'fakeipfsadd'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=fakeipfsadd",
+                    "--package=fil-proofs-param"
+                ],
+                "filter": {
+                    "name": "fakeipfsadd",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'paramcache'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=paramcache",
+                    "--package=fil-proofs-param"
+                ],
+                "filter": {
+                    "name": "paramcache",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'paramcache'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=paramcache",
+                    "--package=fil-proofs-param"
+                ],
+                "filter": {
+                    "name": "paramcache",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'paramfetch'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=paramfetch",
+                    "--package=fil-proofs-param"
+                ],
+                "filter": {
+                    "name": "paramfetch",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'paramfetch'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=paramfetch",
+                    "--package=fil-proofs-param"
+                ],
+                "filter": {
+                    "name": "paramfetch",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'parampublish'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=parampublish",
+                    "--package=fil-proofs-param"
+                ],
+                "filter": {
+                    "name": "parampublish",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'parampublish'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=parampublish",
+                    "--package=fil-proofs-param"
+                ],
+                "filter": {
+                    "name": "parampublish",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'srspublish'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=srspublish",
+                    "--package=fil-proofs-param"
+                ],
+                "filter": {
+                    "name": "srspublish",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'srspublish'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=srspublish",
+                    "--package=fil-proofs-param"
+                ],
+                "filter": {
+                    "name": "srspublish",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'suite'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=suite",
+                    "--package=fil-proofs-param"
+                ],
+                "filter": {
+                    "name": "suite",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'filecoin_proofs'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=filecoin-proofs"
+                ],
+                "filter": {
+                    "name": "filecoin_proofs",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'api'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=api",
+                    "--package=filecoin-proofs"
+                ],
+                "filter": {
+                    "name": "api",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'constants'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=constants",
+                    "--package=filecoin-proofs"
+                ],
+                "filter": {
+                    "name": "constants",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'mod'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=mod",
+                    "--package=filecoin-proofs"
+                ],
+                "filter": {
+                    "name": "mod",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'pieces'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=pieces",
+                    "--package=filecoin-proofs"
+                ],
+                "filter": {
+                    "name": "pieces",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'regression'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=regression",
+                    "--package=filecoin-proofs"
+                ],
+                "filter": {
+                    "name": "regression",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug benchmark 'aggregation'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bench=aggregation",
+                    "--package=filecoin-proofs"
+                ],
+                "filter": {
+                    "name": "aggregation",
+                    "kind": "bench"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug benchmark 'preprocessing'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bench=preprocessing",
+                    "--package=filecoin-proofs"
+                ],
+                "filter": {
+                    "name": "preprocessing",
+                    "kind": "bench"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'filecoin_hashers'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=filecoin-hashers"
+                ],
+                "filter": {
+                    "name": "filecoin_hashers",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'fr32'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=fr32"
+                ],
+                "filter": {
+                    "name": "fr32",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug benchmark 'fr'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bench=fr",
+                    "--package=fr32"
+                ],
+                "filter": {
+                    "name": "fr",
+                    "kind": "bench"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'storage_proofs_core'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=storage-proofs-core"
+                ],
+                "filter": {
+                    "name": "storage_proofs_core",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'por_circuit'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=por_circuit",
+                    "--package=storage-proofs-core"
+                ],
+                "filter": {
+                    "name": "por_circuit",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'por_compound'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=por_compound",
+                    "--package=storage-proofs-core"
+                ],
+                "filter": {
+                    "name": "por_compound",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'por_vanilla'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=por_vanilla",
+                    "--package=storage-proofs-core"
+                ],
+                "filter": {
+                    "name": "por_vanilla",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug benchmark 'blake2s'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bench=blake2s",
+                    "--package=storage-proofs-core"
+                ],
+                "filter": {
+                    "name": "blake2s",
+                    "kind": "bench"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug benchmark 'drgraph'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bench=drgraph",
+                    "--package=storage-proofs-core"
+                ],
+                "filter": {
+                    "name": "drgraph",
+                    "kind": "bench"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug benchmark 'merkle'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bench=merkle",
+                    "--package=storage-proofs-core"
+                ],
+                "filter": {
+                    "name": "merkle",
+                    "kind": "bench"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug benchmark 'misc'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bench=misc",
+                    "--package=storage-proofs-core"
+                ],
+                "filter": {
+                    "name": "misc",
+                    "kind": "bench"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug benchmark 'sha256'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bench=sha256",
+                    "--package=storage-proofs-core"
+                ],
+                "filter": {
+                    "name": "sha256",
+                    "kind": "bench"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug benchmark 'xor'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bench=xor",
+                    "--package=storage-proofs-core"
+                ],
+                "filter": {
+                    "name": "xor",
+                    "kind": "bench"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'sha2raw'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=sha2raw"
+                ],
+                "filter": {
+                    "name": "sha2raw",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'storage_proofs_porep'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=storage-proofs-porep"
+                ],
+                "filter": {
+                    "name": "storage_proofs_porep",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'common'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=common",
+                    "--package=storage-proofs-porep"
+                ],
+                "filter": {
+                    "name": "common",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'stacked_circuit'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=stacked_circuit",
+                    "--package=storage-proofs-porep"
+                ],
+                "filter": {
+                    "name": "stacked_circuit",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'stacked_compound'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=stacked_compound",
+                    "--package=storage-proofs-porep"
+                ],
+                "filter": {
+                    "name": "stacked_compound",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'stacked_vanilla'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=stacked_vanilla",
+                    "--package=storage-proofs-porep"
+                ],
+                "filter": {
+                    "name": "stacked_vanilla",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug benchmark 'encode'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bench=encode",
+                    "--package=storage-proofs-porep"
+                ],
+                "filter": {
+                    "name": "encode",
+                    "kind": "bench"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug benchmark 'parents'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bench=parents",
+                    "--package=storage-proofs-porep"
+                ],
+                "filter": {
+                    "name": "parents",
+                    "kind": "bench"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'storage_proofs_post'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=storage-proofs-post"
+                ],
+                "filter": {
+                    "name": "storage_proofs_post",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'fallback_circuit'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=fallback_circuit",
+                    "--package=storage-proofs-post"
+                ],
+                "filter": {
+                    "name": "fallback_circuit",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'fallback_compound'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=fallback_compound",
+                    "--package=storage-proofs-post"
+                ],
+                "filter": {
+                    "name": "fallback_compound",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'fallback_vanilla'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=fallback_vanilla",
+                    "--package=storage-proofs-post"
+                ],
+                "filter": {
+                    "name": "fallback_vanilla",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'storage_proofs_update'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=storage-proofs-update"
+                ],
+                "filter": {
+                    "name": "storage_proofs_update",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'circuit'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=circuit",
+                    "--package=storage-proofs-update"
+                ],
+                "filter": {
+                    "name": "circuit",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'circuit_poseidon'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=circuit_poseidon",
+                    "--package=storage-proofs-update"
+                ],
+                "filter": {
+                    "name": "circuit_poseidon",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'compound'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=compound",
+                    "--package=storage-proofs-update"
+                ],
+                "filter": {
+                    "name": "compound",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'fil_proofs_tooling'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=fil-proofs-tooling"
+                ],
+                "filter": {
+                    "name": "fil_proofs_tooling",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'benchy'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=benchy",
+                    "--package=fil-proofs-tooling"
+                ],
+                "filter": {
+                    "name": "benchy",
+                    "kind": "bin"
+                }
+            },
+            "args": [
+                "porep --size 8MiB --cache ./test"
+            ],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'benchy'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=benchy",
+                    "--package=fil-proofs-tooling"
+                ],
+                "filter": {
+                    "name": "benchy",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'check_parameters'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=check_parameters",
+                    "--package=fil-proofs-tooling"
+                ],
+                "filter": {
+                    "name": "check_parameters",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'check_parameters'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=check_parameters",
+                    "--package=fil-proofs-tooling"
+                ],
+                "filter": {
+                    "name": "check_parameters",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'circuitinfo'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=circuitinfo",
+                    "--package=fil-proofs-tooling"
+                ],
+                "filter": {
+                    "name": "circuitinfo",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'circuitinfo'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=circuitinfo",
+                    "--package=fil-proofs-tooling"
+                ],
+                "filter": {
+                    "name": "circuitinfo",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'fdlimit'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=fdlimit",
+                    "--package=fil-proofs-tooling"
+                ],
+                "filter": {
+                    "name": "fdlimit",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'fdlimit'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=fdlimit",
+                    "--package=fil-proofs-tooling"
+                ],
+                "filter": {
+                    "name": "fdlimit",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'gen_graph_cache'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=gen_graph_cache",
+                    "--package=fil-proofs-tooling"
+                ],
+                "filter": {
+                    "name": "gen_graph_cache",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'gen_graph_cache'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=gen_graph_cache",
+                    "--package=fil-proofs-tooling"
+                ],
+                "filter": {
+                    "name": "gen_graph_cache",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'gpu-cpu-test'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=gpu-cpu-test",
+                    "--package=fil-proofs-tooling"
+                ],
+                "filter": {
+                    "name": "gpu-cpu-test",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'gpu-cpu-test'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=gpu-cpu-test",
+                    "--package=fil-proofs-tooling"
+                ],
+                "filter": {
+                    "name": "gpu-cpu-test",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'micro'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=micro",
+                    "--package=fil-proofs-tooling"
+                ],
+                "filter": {
+                    "name": "micro",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'micro'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=micro",
+                    "--package=fil-proofs-tooling"
+                ],
+                "filter": {
+                    "name": "micro",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'settings'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=settings",
+                    "--package=fil-proofs-tooling"
+                ],
+                "filter": {
+                    "name": "settings",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'settings'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=settings",
+                    "--package=fil-proofs-tooling"
+                ],
+                "filter": {
+                    "name": "settings",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'update_tree_r_cache'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=update_tree_r_cache",
+                    "--package=fil-proofs-tooling"
+                ],
+                "filter": {
+                    "name": "update_tree_r_cache",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'update_tree_r_cache'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=update_tree_r_cache",
+                    "--package=fil-proofs-tooling"
+                ],
+                "filter": {
+                    "name": "update_tree_r_cache",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

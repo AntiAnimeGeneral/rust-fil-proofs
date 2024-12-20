@@ -9,3 +9,4 @@ logging-toolkit
 *.profile
 *.heap
 rust-fil-proofs.config.toml
+/cache

@@ -28,7 +28,7 @@ pub fn create_labels_for_encoding<
     P: AsRef<Path>,
 >(
     graph: &StackedBucketGraph<Tree::Hasher>,
-    parents_cache: &mut ParentCache,
+    parents_cache: &mut ParentCache, // 用于根据当前节点查找父节点位置的表
     layers: usize,
     replica_id: T,
     cache_path: P,

@@ -159,6 +159,7 @@ where
 
         let mut config = StoreConfig::new(cache_path.as_ref(), CacheKey::CommDTree.to_string(), 0);
 
+        // create sc-02-data-tree-d
         let data_tree = create_base_merkle_tree::<BinaryMerkleTree<DefaultPieceHasher>>(
             Some(config.clone()),
             base_tree_leafs,
@@ -190,6 +191,7 @@ where
         &porep_config.porep_id,
     );
 
+    // create&gen + layer-1&2
     let (labels, _) = StackedDrg::<Tree, DefaultPieceHasher>::replicate_phase1(
         &compound_public_params.vanilla_params,
         &replica_id,
@@ -292,7 +294,7 @@ where
     let (tau, (p_aux, t_aux)) = StackedDrg::<Tree, DefaultPieceHasher>::replicate_phase2(
         &compound_public_params.vanilla_params,
         labels,
-        data,
+        data, // sealed-file
         Some(data_tree),
         cache_path.as_ref().to_path_buf(),
         replica_path.as_ref().to_path_buf(),

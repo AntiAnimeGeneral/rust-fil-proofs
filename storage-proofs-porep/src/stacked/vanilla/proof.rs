@@ -112,14 +112,14 @@ impl<'a, Tree: 'static + MerkleTreeTrait, G: 'static + Hasher> StackedDrg<'a, Tr
         t_aux: &TemporaryAuxCache<Tree, G>,
         challenges: &Challenges,
         num_layers: usize,
-        partition_count: usize,
+        partition_count: usize, // 1
     ) -> Result<Vec<Vec<Proof<Tree, G>>>> {
         assert!(num_layers > 0);
         // Sanity checks on restored trees.
         assert!(pub_inputs.tau.is_some());
 
         match challenges {
-            Challenges::Interactive(interactive_challenges) => {
+            Challenges::Interactive(interactive_challenges) => { // 2
                 info!("generating interactive vanilla proofs");
 
                 let seed = pub_inputs
@@ -143,7 +143,7 @@ impl<'a, Tree: 'static + MerkleTreeTrait, G: 'static + Hasher> StackedDrg<'a, Tr
                             pub_inputs,
                             p_aux.comm_c,
                             t_aux,
-                            challenge_positions,
+                            challenge_positions, // [30565, 204330][144384,218420]
                             num_layers,
                         )
                     })
@@ -222,7 +222,7 @@ impl<'a, Tree: 'static + MerkleTreeTrait, G: 'static + Hasher> StackedDrg<'a, Tr
                             pub_inputs,
                             p_aux.comm_c,
                             t_aux,
-                            challenge_positions,
+                            challenge_positions, 
                             num_layers,
                         )
                     })
@@ -328,7 +328,7 @@ impl<'a, Tree: 'static + MerkleTreeTrait, G: 'static + Hasher> StackedDrg<'a, Tr
                             assert_eq!(comm_c, tree_c.root());
 
                             // All labels in C_X
-                            trace!("  c_x");
+                            trace!("  c_x");// 选取该列 + 用列索的节点重新引向上构建merkle树
                             let c_x = t_aux.column(challenge as u32)?.into_proof(tree_c)?;
 
                             // All labels in the DRG parents.
@@ -379,7 +379,7 @@ impl<'a, Tree: 'static + MerkleTreeTrait, G: 'static + Hasher> StackedDrg<'a, Tr
                     let mut labeling_proofs = Vec::with_capacity(num_layers);
                     let mut encoding_proof = None;
 
-                    for layer in 1..=num_layers {
+                    for layer in 1..=num_layers {// panic at layer 2
                         trace!("  encoding proof layer {}", layer,);
                         let parents_data: Vec<<Tree::Hasher as Hasher>::Domain> = if layer == 1 {
                             let mut parents = vec![0; graph.base_graph().degree()];
@@ -411,7 +411,7 @@ impl<'a, Tree: 'static + MerkleTreeTrait, G: 'static + Hasher> StackedDrg<'a, Tr
 
                         // repeat parents
                         let mut parents_data_full = vec![Default::default(); TOTAL_PARENTS];
-                        for chunk in parents_data_full.chunks_mut(parents_data.len()) {
+                        for chunk in parents_data_full.chunks_mut(parents_data.len()) { // 6 | 14
                             chunk.copy_from_slice(&parents_data[..chunk.len()]);
                         }
 
@@ -676,7 +676,7 @@ impl<'a, Tree: 'static + MerkleTreeTrait, G: 'static + Hasher> StackedDrg<'a, Tr
     where
         P: AsRef<Path>,
     {
-        let mut parent_cache = graph.parent_cache()?;
+        let mut parent_cache = graph.parent_cache()?; //"/var/tmp/filecoin-parents/v28-sdr-parent-652bae61e906c0732e9eb95b1217cfa6afcce221ff92a8aedf62fa778fa765bc.cache"
 
         #[cfg(feature = "multicore-sdr")]
         {
@@ -1178,8 +1178,8 @@ impl<'a, Tree: 'static + MerkleTreeTrait, G: 'static + Hasher> StackedDrg<'a, Tr
 
     #[cfg(any(feature = "cuda", feature = "opencl"))]
     fn prepare_tree_r_data(
-        source: &DiskStore<<Tree::Hasher as Hasher>::Domain>,
-        data: Option<&mut Data<'_>>,
+        source: &DiskStore<<Tree::Hasher as Hasher>::Domain>, // last layer
+        data: Option<&mut Data<'_>>, // sealed file
         start: usize,
         end: usize,
     ) -> Result<TreeRElementData<Tree>> {
@@ -1519,12 +1519,12 @@ impl<'a, Tree: 'static + MerkleTreeTrait, G: 'static + Hasher> StackedDrg<'a, Tr
     }
 
     fn generate_tree_r_last_cpu(
-        data: &mut Data<'_>,
+        data: &mut Data<'_>, // sealed-file
         nodes_count: usize,
         tree_count: usize,
         tree_r_last_config: StoreConfig,
         replica_path: PathBuf,
-        source: &DiskStore<<Tree::Hasher as Hasher>::Domain>,
+        source: &DiskStore<<Tree::Hasher as Hasher>::Domain>,// last layer(2)
         callback: PrepareTreeRDataCallback<Tree>,
     ) -> Result<LCTree<Tree::Hasher, Tree::Arity, Tree::SubTreeArity, Tree::TopTreeArity>> {
         let (configs, replica_config) = split_config_and_replica(
@@ -1533,6 +1533,8 @@ impl<'a, Tree: 'static + MerkleTreeTrait, G: 'static + Hasher> StackedDrg<'a, Tr
             nodes_count,
             tree_count,
         )?;
+        // println!("cfgs: {configs:?}");
+        // println!("replica: {replica_config:?}");
 
         info!("generating tree r last using the CPU");
 
@@ -1567,6 +1569,8 @@ impl<'a, Tree: 'static + MerkleTreeTrait, G: 'static + Hasher> StackedDrg<'a, Tr
                 std::fs::remove_file(&tree_r_last_store_path)
                     .expect("failed to remove tree_r_last_store_path");
             }
+            // println!("---config: {config:?}\n");
+            // println!("--date len: {:?}\n",encoded_data.len());
 
             LCTree::<Tree::Hasher, Tree::Arity, U0, U0>::from_par_iter_with_config(
                 encoded_data,
@@ -1596,12 +1600,12 @@ impl<'a, Tree: 'static + MerkleTreeTrait, G: 'static + Hasher> StackedDrg<'a, Tr
         label_configs: Labels<Tree>,
     ) -> Result<TransformedLayers<Tree, G>> {
         trace!("transform_and_replicate_layers");
-        let total_nodes_count = graph.size();
+        let total_nodes_count = graph.size(); // 262114
 
         assert_eq!(data.len(), total_nodes_count * NODE_SIZE);
         trace!("nodes count {}, data len {}", total_nodes_count, data.len());
 
-        let tree_count = get_base_tree_count::<Tree>();
+        let tree_count = get_base_tree_count::<Tree>(); // 1
         let nodes_count = graph.size() / tree_count;
 
         // Ensure that the node count will work for binary and oct arities.
@@ -1668,12 +1672,13 @@ impl<'a, Tree: 'static + MerkleTreeTrait, G: 'static + Hasher> StackedDrg<'a, Tr
             }
             None => error!("Failed to raise the fd limit"),
         };
+        // println!("cfgs: {configs:?} labels: {labels:?}");
 
         let tree_c_root = match num_layers {
             2 => {
                 let tree_c = Self::generate_tree_c::<U2, Tree::Arity>(
-                    nodes_count,
-                    tree_count,
+                    nodes_count, // 262114
+                    tree_count, // 1
                     configs,
                     &labels,
                 )?;
