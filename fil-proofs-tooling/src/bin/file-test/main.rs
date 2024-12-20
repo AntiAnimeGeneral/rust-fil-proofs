@@ -11,7 +11,31 @@ mod porep;
 mod window_post;
 
 #[derive(Debug, Parser)]
-struct Cli {
+enum Cli {
+    WindowPost(WindowPost),
+    Seal(Seal),
+}
+
+#[derive(Debug, Parser)]
+struct WindowPost {
+    /// Size of sector
+    #[clap(long,value_parser=parse_size)]
+    size: usize,
+
+    #[clap(long)]
+    /// The cache file dir
+    cache: String,
+
+    /// Num of tasks
+    #[clap(long, default_value_t = 1)]
+    tasks: usize,
+
+    #[clap(long, default_value_t = ApiVersion::V1_2_0)]
+    api_version: ApiVersion,
+}
+
+#[derive(Debug, Parser)]
+struct Seal {
     /// Size of sector
     #[clap(long,value_parser=parse_size)]
     size: usize,
@@ -38,9 +62,6 @@ struct Cli {
     test_resume: bool,
 }
 
-#[derive(Debug, Parser)]
-struct Validate {}
-
 fn parse_size(size: &str) -> anyhow::Result<usize> {
     let size = Byte::from_str(size)?.get_bytes() as usize;
     match size as u64 {
@@ -56,41 +77,61 @@ fn parse_size(size: &str) -> anyhow::Result<usize> {
 fn main() {
     fil_logger::init();
 
-    let Cli {
-        size,
-        cache,
-        tasks,
-        api_version,
-        api_features,
-        preserve_cache,
-        skip_precommit_phase1,
-        skip_precommit_phase2,
-        skip_commit_phase1,
-        skip_commit_phase2,
-        test_resume,
-    } = Cli::parse();
-
-    (0..tasks).into_par_iter().for_each(|task| {
-        let mut cache = cache.clone();
-        cache.push_str(&format!("/task-{task}"));
-        let rep = porep::run(
+    let cli = Cli::parse();
+    match cli {
+        Cli::Seal(Seal {
             size,
-            api_version,
-            api_features.clone(),
             cache,
+            tasks,
+            api_version,
+            api_features,
             preserve_cache,
             skip_precommit_phase1,
             skip_precommit_phase2,
             skip_commit_phase1,
             skip_commit_phase2,
             test_resume,
-        )
-        .unwrap();
-        let wrapped = Metadata::wrap(&rep)
-            .expect("failed to retrieve metadata");
-        let js = to_string_pretty(&wrapped).unwrap();
-        println!("task-{task}-report: {js}")
-    });
+        }) => {
+            (0..tasks).into_par_iter().for_each(|task| {
+                let mut cache = cache.clone();
+                cache.push_str(&format!("/task-{task}"));
+                let rep = porep::run(
+                    size,
+                    api_version,
+                    api_features.clone(),
+                    cache,
+                    preserve_cache,
+                    skip_precommit_phase1,
+                    skip_precommit_phase2,
+                    skip_commit_phase1,
+                    skip_commit_phase2,
+                    test_resume,
+                )
+                .unwrap();
+                let wrapped = Metadata::wrap(&rep)
+                    .expect("failed to retrieve metadata");
+                let js = to_string_pretty(&wrapped).unwrap();
+                println!("task-{task}-report: {js}")
+            });
+        }
+        Cli::WindowPost(WindowPost {
+            size,
+            cache,
+            tasks,
+            api_version,
+        }) => {
+            (0..tasks).into_par_iter().for_each(|task| {
+                let mut cache = cache.clone();
+                cache.push_str(&format!("/task-{task}"));
+                let rep = window_post::run(size, api_version, cache)
+                    .unwrap();
+                let wrapped = Metadata::wrap(&rep)
+                    .expect("failed to retrieve metadata");
+                let js = to_string_pretty(&wrapped).unwrap();
+                println!("task-{task}-report: {js}")
+            });
+        }
+    };
 }
 
 #[cfg(test)]

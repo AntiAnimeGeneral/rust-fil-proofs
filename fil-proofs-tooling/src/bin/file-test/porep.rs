@@ -6,7 +6,7 @@ use std::io::{Seek, Write};
 use std::path::PathBuf;
 use std::time::{SystemTime, UNIX_EPOCH};
 
-use anyhow::{bail, ensure, Context};
+use anyhow::{ensure, Context};
 use bincode::{deserialize, serialize};
 use fil_proofs_tooling::measure;
 use fil_proofs_tooling::measure::FuncMeasurement;
@@ -721,8 +721,10 @@ pub fn run(
     }
     info!("Using cache directory {:?}", cache_dir);
 
-    select_run(
-        sector_size,
+    with_shape!(
+        sector_size as u64,
+        run_porep_bench,
+        sector_size as u64,
         api_version,
         api_features,
         cache_dir,
@@ -733,143 +735,4 @@ pub fn run(
         skip_commit_phase2,
         test_resume,
     )
-}
-
-fn select_run(
-    sector_size: usize,
-    api_version: ApiVersion,
-    api_features: Vec<ApiFeature>,
-    cache_dir: PathBuf,
-    preserve_cache: bool,
-    skip_precommit_phase1: bool,
-    skip_precommit_phase2: bool,
-    skip_commit_phase1: bool,
-    skip_commit_phase2: bool,
-    test_resume: bool,
-) -> anyhow::Result<Report> {
-    match sector_size as u64 {
-        SECTOR_SIZE_2_KIB => run_porep_bench::<SectorShape2KiB>(
-            sector_size as u64,
-            api_version,
-            api_features,
-            cache_dir,
-            preserve_cache,
-            skip_precommit_phase1,
-            skip_precommit_phase2,
-            skip_commit_phase1,
-            skip_commit_phase2,
-            test_resume,
-        ),
-        SECTOR_SIZE_4_KIB => run_porep_bench::<SectorShape4KiB>(
-            sector_size as u64,
-            api_version,
-            api_features,
-            cache_dir,
-            preserve_cache,
-            skip_precommit_phase1,
-            skip_precommit_phase2,
-            skip_commit_phase1,
-            skip_commit_phase2,
-            test_resume,
-        ),
-        SECTOR_SIZE_16_KIB => run_porep_bench::<SectorShape16KiB>(
-            sector_size as u64,
-            api_version,
-            api_features,
-            cache_dir,
-            preserve_cache,
-            skip_precommit_phase1,
-            skip_precommit_phase2,
-            skip_commit_phase1,
-            skip_commit_phase2,
-            test_resume,
-        ),
-        SECTOR_SIZE_32_KIB => run_porep_bench::<SectorShape32KiB>(
-            sector_size as u64,
-            api_version,
-            api_features,
-            cache_dir,
-            preserve_cache,
-            skip_precommit_phase1,
-            skip_precommit_phase2,
-            skip_commit_phase1,
-            skip_commit_phase2,
-            test_resume,
-        ),
-        SECTOR_SIZE_8_MIB => run_porep_bench::<SectorShape8MiB>(
-            sector_size as u64,
-            api_version,
-            api_features,
-            cache_dir,
-            preserve_cache,
-            skip_precommit_phase1,
-            skip_precommit_phase2,
-            skip_commit_phase1,
-            skip_commit_phase2,
-            test_resume,
-        ),
-        SECTOR_SIZE_16_MIB => run_porep_bench::<SectorShape16MiB>(
-            sector_size as u64,
-            api_version,
-            api_features,
-            cache_dir,
-            preserve_cache,
-            skip_precommit_phase1,
-            skip_precommit_phase2,
-            skip_commit_phase1,
-            skip_commit_phase2,
-            test_resume,
-        ),
-        SECTOR_SIZE_512_MIB => run_porep_bench::<SectorShape512MiB>(
-            sector_size as u64,
-            api_version,
-            api_features,
-            cache_dir,
-            preserve_cache,
-            skip_precommit_phase1,
-            skip_precommit_phase2,
-            skip_commit_phase1,
-            skip_commit_phase2,
-            test_resume,
-        ),
-        SECTOR_SIZE_1_GIB => run_porep_bench::<SectorShape1GiB>(
-            sector_size as u64,
-            api_version,
-            api_features,
-            cache_dir,
-            preserve_cache,
-            skip_precommit_phase1,
-            skip_precommit_phase2,
-            skip_commit_phase1,
-            skip_commit_phase2,
-            test_resume,
-        ),
-        SECTOR_SIZE_32_GIB => run_porep_bench::<SectorShape32GiB>(
-            sector_size as u64,
-            api_version,
-            api_features,
-            cache_dir,
-            preserve_cache,
-            skip_precommit_phase1,
-            skip_precommit_phase2,
-            skip_commit_phase1,
-            skip_commit_phase2,
-            test_resume,
-        ),
-        SECTOR_SIZE_64_GIB => run_porep_bench::<SectorShape64GiB>(
-            sector_size as u64,
-            api_version,
-            api_features,
-            cache_dir,
-            preserve_cache,
-            skip_precommit_phase1,
-            skip_precommit_phase2,
-            skip_commit_phase1,
-            skip_commit_phase2,
-            test_resume,
-        ),
-        _ => {
-            bail!("unsupported sector size: {sector_size}")
-        }
-    }
 }
