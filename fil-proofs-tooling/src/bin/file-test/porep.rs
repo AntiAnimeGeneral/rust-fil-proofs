@@ -663,7 +663,7 @@ pub fn run(
     sector_size: usize,
     api_version: ApiVersion,
     api_features: Vec<ApiFeature>,
-    cache: String,
+    cache: PathBuf,
     preserve_cache: bool,
     skip_precommit_phase1: bool,
     skip_precommit_phase2: bool,
@@ -678,15 +678,15 @@ pub fn run(
         .join(",");
     info!("Benchy PoRep: sector-size={}, api_version={}, preserve_cache={}, skip_precommit_phase1={}, skip_precommit_phase2={}, skip_commit_phase1={}, skip_commit_phase2={}, test_resume={}, api_features={}", sector_size, api_version, preserve_cache, skip_precommit_phase1, skip_precommit_phase2, skip_commit_phase1, skip_commit_phase2, test_resume, api_features_str);
 
-    let cache_dir_specified = !cache.is_empty();
+    // let cache_dir_specified = !cache.to_string_lossy().is_empty();
 
-    // If 'preserve_cache' is specified, the 'cache' option must be specified and must not exist on disk.
-    if preserve_cache {
-        ensure!(
-            cache_dir_specified && !PathBuf::from(&cache).exists(),
-            "The 'preserve_cache' option cannot be used with a cache_dir that already exists"
-        );
-    }
+    // // If 'preserve_cache' is specified, the 'cache' option must be specified and must not exist on disk.
+    // if preserve_cache {
+    //     ensure!(
+    //         cache_dir_specified && !PathBuf::from(&cache).exists(),
+    //         "The 'preserve_cache' option cannot be used with a cache_dir that already exists"
+    //     );
+    // }
 
     if skip_precommit_phase1
         || skip_precommit_phase2
@@ -697,13 +697,13 @@ pub fn run(
             !preserve_cache,
             "Preserve cache cannot be used if skipping any stages"
         );
-        ensure!(
-            cache_dir_specified,
-            "Cache dir is required if skipping any stages"
-        );
+        // ensure!(
+        //     cache_dir_specified,
+        //     "Cache dir is required if skipping any stages"
+        // );
     }
 
-    let (cache_dir, preserve_cache) = if cache_dir_specified {
+    let (cache_dir, preserve_cache) = if true {
         // If a cache dir was specified, automatically preserve it.
         (PathBuf::from(cache), true)
     } else {
@@ -717,7 +717,7 @@ pub fn run(
     };
 
     if !cache_dir.exists() {
-        create_dir_all(&cache_dir)?;
+        create_dir_all(&cache_dir).unwrap();
     }
     info!("Using cache directory {:?}", cache_dir);
 

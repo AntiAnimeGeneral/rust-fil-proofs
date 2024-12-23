@@ -1,7 +1,7 @@
 use std::collections::BTreeMap;
-use std::fs::{create_dir_all, read};
-use std::path::PathBuf;
-use std::time::{SystemTime, UNIX_EPOCH};
+use std::fs::read;
+use std::os::unix::fs::MetadataExt;
+use std::path::{Path, PathBuf};
 
 use anyhow::Context;
 use bincode::deserialize;
@@ -55,7 +55,6 @@ pub fn run_window_post_bench<Tree: 'static + MerkleTreeTrait>(
     sector_size: u64,
     api_version: ApiVersion,
     cache_dir: PathBuf,
-    // preserve_cache: bool,
 ) -> anyhow::Result<Report> {
     let seal_pre_commit_output = {
         let phase2_output_path =
@@ -148,13 +147,6 @@ pub fn run_window_post_bench<Tree: 'static + MerkleTreeTrait>(
     })
     .expect("failed to verify window post proof");
 
-    // if preserve_cache {
-    //     info!("Preserving cache directory {:?}", cache_dir);
-    // } else {
-    //     info!("Removing cache directory {:?}", cache_dir);
-    //     remove_dir_all(cache_dir)?;
-    // }
-
     let report = Report {
         inputs: Inputs { sector_size },
         outputs: Outputs {
@@ -175,43 +167,25 @@ pub fn run_window_post_bench<Tree: 'static + MerkleTreeTrait>(
         },
     };
 
-    // // Create a JSON serializable report that we print to stdout (that will later be parsed using
-    // // the CLI JSON parser `jq`).
-    // report.print();
     Ok(report)
 }
 
 #[allow(clippy::too_many_arguments)]
 pub fn run(
-    sector_size: usize,
     api_version: ApiVersion,
-    cache: String,
+    dir: impl AsRef<Path>,
 ) -> anyhow::Result<Report> {
-    let cache_dir_specified = !cache.is_empty();
+    let dir = dir.as_ref();
 
-    let cache_dir = if cache_dir_specified {
-        // If a cache dir was specified, automatically preserve it.
-        PathBuf::from(cache)
-    } else {
-        let timestamp =
-            SystemTime::now().duration_since(UNIX_EPOCH)?.as_millis();
-
-        std::env::temp_dir()
-            .join(format!("window-post-bench-{}", timestamp))
-        // preserve_cache,
-    };
-
-    if !cache_dir.exists() {
-        create_dir_all(&cache_dir)?;
-    }
-    info!("Using cache directory {:?}", cache_dir);
+    let seal_path = dir.join(SEALED_FILE);
+    let info = std::fs::metadata(seal_path)?;
+    let sector_size = info.size();
 
     with_shape!(
         sector_size as u64,
         run_window_post_bench,
         sector_size as u64,
         api_version,
-        cache_dir,
-        // preserve_cache,
+        dir.to_path_buf(),
     )
 }
